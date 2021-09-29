@@ -28,7 +28,11 @@ export default {
         rel: "stylesheet",
         href: "/bootstrap.min.css"
       },
-      {rel:"stylesheet",href:"https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"}
+      {
+        rel: "stylesheet",
+        href:
+          "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+      }
     ]
   },
 
@@ -48,12 +52,29 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
-    "@nuxtjs/bootstrap-vue"
+    "@nuxtjs/bootstrap-vue",
+    "nuxt-socket-io"
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
-
+  io: {
+    sockets: [
+      // Required
+      {
+        // At least one entry is required
+        name: "home",
+        url: "http://localhost:3002",
+        default: true,
+        vuex: {
+          /* see section below */
+        },
+        namespaces: {
+          /* see section below */
+        }
+      }
+    ]
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {}
 };
