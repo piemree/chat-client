@@ -1,3 +1,4 @@
+require("dotenv").config();
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -64,7 +65,7 @@ export default {
       {
         // At least one entry is required
         name: "home",
-        url: "http://localhost:3002",
+        url: process.env.BASE_URL || "http://localhost:3002",
         default: true,
         vuex: {
           /* see section below */
