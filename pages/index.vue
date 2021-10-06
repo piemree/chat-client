@@ -1,5 +1,10 @@
 <template>
-  <Chat :sendMessage="sendMessage" />
+  <!-- <Chat :sendMessage="sendMessage" /> -->
+  <div class="card">
+    <Navbar />
+    <Chat />
+    <Bottom :sendMessage="sendMessage" />
+  </div>
 </template>
 
 <script>
@@ -14,7 +19,6 @@ export default {
     });
     this.socket.on("message", paylaod => {
       this.$store.commit("addMessage", paylaod);
-     
     });
   },
   methods: {
@@ -24,3 +28,4 @@ export default {
   }
 };
 </script>
+

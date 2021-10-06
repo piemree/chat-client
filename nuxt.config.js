@@ -54,18 +54,47 @@ export default {
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     "@nuxtjs/bootstrap-vue",
-    "nuxt-socket-io"
+    "nuxt-socket-io",
+    "@nuxtjs/axios",
+    "@nuxtjs/auth-next"
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: { baseURL: "http://localhost:3002/api" },
+  auth: {
+    redirect: {
+      login: "/login",
+      logout: "/login",
+      home: "/"
+    },
+    strategies: {
+      local: {
+        token: {
+          property: "access_token",
+          global: true,
+          required: true,
+          type: "Bearer"
+        },
+        user: {
+          property: "user",
+          global: true,
+          required: true
+        },
+        endpoints: {
+          login: { url: "login", method: "post" },
+          user: { url: "user", method: "get" },
+          logout: false
+        }
+      }
+    }
+  },
   io: {
     sockets: [
       // Required
       {
         // At least one entry is required
         name: "home",
-        url: process.env.BASE_URL || "http://localhost:3002",
+        url: "http://localhost:3002",
         default: true,
         vuex: {
           /* see section below */
@@ -75,6 +104,9 @@ export default {
         }
       }
     ]
+  },
+  router: {
+    middleware: ["auth"]
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {}
