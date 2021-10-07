@@ -13,8 +13,11 @@ export default {
     this.socket = this.$nuxtSocket({
       persist: true
     });
+
+    this.socket.on("connect",() => {
+      this.socket.emit("credentials",this.$auth.user)
+    })
     this.socket.on("setId", ({ id }) => {
-      console.log(id);
       this.$store.commit("setOwnId", id);
     });
     this.socket.on("message", paylaod => {

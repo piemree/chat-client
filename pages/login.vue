@@ -28,15 +28,17 @@
             </div>
             <div class="form-check">
               <input
+                @change="saveFormData = !saveFormData"
                 type="checkbox"
+                ref="checkbox"
                 class="form-check-input"
                 id="exampleCheck1"
               />
               <label class="form-check-label" for="exampleCheck1"
-                >Check me out</label
+                >Remember me</label
               >
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
           </form>
         </div>
       </div>
@@ -48,6 +50,7 @@
 export default {
   data() {
     return {
+      saveFormData: false,
       credentials: {
         username: "",
         password: ""
@@ -55,9 +58,24 @@ export default {
     };
   },
   methods: {
-    login() {
-      this.$auth.loginWith("local", { data: this.credentials });
+    async login() {
+      await this.$auth.loginWith("local", { data: this.credentials });
+      this.saveFormDataToLocalStorage(this.credentials, this.saveFormData);
+    },
+    saveFormDataToLocalStorage(credentials, willItBeRecorded) {
+      if (willItBeRecorded) {
+        localStorage.setItem("credentials", JSON.stringify(credentials));
+        return;
+      }
+      localStorage.removeItem("credentials");
     }
+  },
+  mounted() {
+    const credentials = JSON.parse(localStorage.getItem("credentials"));
+    if (!credentials) return;
+    this.credentials.username = credentials.username;
+    this.credentials.password = credentials.password;
+    this.$refs.checkbox.checked = true;
   }
 };
 </script>

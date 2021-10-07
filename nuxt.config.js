@@ -60,7 +60,7 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: { baseURL: "http://localhost:3002/api" },
+  axios: { baseURL:  "http://localhost:3002/api" },
   auth: {
     redirect: {
       login: "/login",
@@ -94,7 +94,7 @@ export default {
       {
         // At least one entry is required
         name: "home",
-        url: "http://localhost:3002",
+        url: process.env.BASE_URL ||"http://localhost:3002",
         default: true,
         vuex: {
           /* see section below */
