@@ -1,7 +1,7 @@
 <template>
   <!-- <Chat :sendMessage="sendMessage" /> -->
   <div class="card">
-    <Navbar />
+    
     <Chat />
     <Bottom :sendMessage="sendMessage" />
   </div>
@@ -10,10 +10,7 @@
 <script>
 export default {
   mounted() {
-    this.socket = this.$nuxtSocket({
-      persist: true
-    });
-
+    this.socket = this.$socket
     this.socket.on("connect",() => {
       this.socket.emit("credentials",this.$auth.user)
     })
@@ -21,6 +18,7 @@ export default {
       this.$store.commit("setOwnId", id);
     });
     this.socket.on("message", paylaod => {
+       console.log(payload)
       this.$store.commit("addMessage", paylaod);
     });
   },

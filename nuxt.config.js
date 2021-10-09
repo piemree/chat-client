@@ -41,7 +41,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ["~/plugins/socket.js"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -54,13 +54,13 @@ export default {
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     "@nuxtjs/bootstrap-vue",
-    "nuxt-socket-io",
+    // "nuxt-socket-io",
     "@nuxtjs/axios",
     "@nuxtjs/auth-next"
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: { baseURL:  "http://localhost:3002/api" },
+  axios: { baseURL: "http://localhost:3002/api" },
   auth: {
     redirect: {
       login: "/login",
@@ -88,23 +88,21 @@ export default {
       }
     }
   },
-  io: {
+  /*  socket: {
     sockets: [
-      // Required
+      
       {
-        // At least one entry is required
+        
         name: "home",
-        url: process.env.BASE_URL ||"http://localhost:3002",
+        url: "http://localhost:3002",
         default: true,
         vuex: {
-          /* see section below */
         },
         namespaces: {
-          /* see section below */
         }
       }
     ]
-  },
+  }, */
   router: {
     middleware: ["auth"]
   },

@@ -59,7 +59,11 @@ export default {
   },
   methods: {
     async login() {
-      await this.$auth.loginWith("local", { data: this.credentials });
+      try {
+        await this.$auth.loginWith("local", { data: this.credentials });
+      } catch (error) {
+        console.log(error);
+      }
       this.saveFormDataToLocalStorage(this.credentials, this.saveFormData);
     },
     saveFormDataToLocalStorage(credentials, willItBeRecorded) {
