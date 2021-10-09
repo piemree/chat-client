@@ -1,6 +1,7 @@
 export const state = () => ({
   messages: [],
-  id: null
+  id: null,
+  leftBarStatus:true
 });
 
 export const mutations = {
@@ -12,5 +13,8 @@ export const mutations = {
   },
   setOwnId(state, id) {
     state.id = id;
+  },
+  setLeftBarStatus(state,leftBarStatus){
+    state.leftBarStatus = leftBarStatus;
   }
 };
