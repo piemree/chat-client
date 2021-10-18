@@ -4,14 +4,19 @@
     id="chat-nav"
   >
     <div class="d-flex align-items-center ">
-      <button @click="toggle" class="btn text-light p-0 mr-3">
+      <button
+        v-show="$auth.loggedIn"
+        @click="toggle"
+        class="btn text-light p-0 mr-3"
+      >
         <h3><i class="bi bi-justify"></i></h3>
       </button>
     </div>
     <div>
+      <input v-model="roomName" type="text" />
       <button
         v-show="$auth.loggedIn"
-        @click="createRoom"
+        @click="joinRoom"
         class="btn text-light p-0 mr-3"
       >
         <h2><i class="bi bi-plus"></i></h2>
@@ -31,19 +36,23 @@
 export default {
   data() {
     return {
-      leftBarStatus: true
+      leftBarStatus: true,
+      roomName: ""
     };
   },
   methods: {
-    async logout() {
+    async logout() {+
       await this.$auth.logout();
       this.$router.push("login");
     },
-    createRoom() {
-      this.$store.dispatch("room/createNewRoom", "room1");
+    joinRoom() {
+      this.$socket.emit("joinRoom", {
+        user: this.$auth.user,
+        roomName: this.roomName
+      });
     },
     toggle() {
-      this.leftBarStatus= !this.leftBarStatus;
+      this.leftBarStatus = !this.leftBarStatus;
       this.$store.commit("setLeftBarStatus", this.leftBarStatus);
     }
   }

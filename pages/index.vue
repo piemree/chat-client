@@ -2,10 +2,27 @@
   <!-- <Chat :sendMessage="sendMessage" /> -->
   <div class="card position-relative">
     <div class="row">
-      <div v-show="toggle" class="col-3 bg-danger">
-        <LeftBar />
+      <div v-show="toggle" class="col-3 border-right p-0 overflow-auto" style="max-height:calc(100vh - 83px)">
+        <Room />
+        <Room />
+        <Room />
+        <Room />
+        <Room />
+        <Room />
+        <Room />
+        <Room />
+        <Room />
+        <Room />
+        <Room />
+        <Room />
+        <Room />
+        <Room />
+        <Room />
+        <Room />
+        <Room />
+        <Room />
       </div>
-      <div :class="toggle ? 'col-9' : 'col-12'">
+      <div class="p-0" :class="toggle ? 'col-9' : 'col-12'">
         <Chat />
         <Bottom :sendMessage="sendMessage" />
       </div>
