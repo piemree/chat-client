@@ -6,40 +6,20 @@
     <div class="row justify-content-center">
       <div class="col-6">
         <div class="card p-5">
-          <form @submit.prevent="login">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Enter email"
-                v-model="credentials.username"
-              />
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="exampleInputPassword1"
-                placeholder="Password"
-                v-model="credentials.password"
-              />
-            </div>
-            <div class="form-check">
-              <input
-                @change="saveFormData = !saveFormData"
-                type="checkbox"
-                ref="checkbox"
-                class="form-check-input"
-                id="exampleCheck1"
-              />
-              <label class="form-check-label" for="exampleCheck1"
-                >Remember me</label
-              >
-            </div>
-            <button type="submit" class="btn btn-primary mt-3">Submit</button>
-          </form>
+          <Login v-if="isLoginForm" />
+          <Register v-else />
+          <div class="m-auto">
+            <span>Or </span>
+            <a
+              v-if="isLoginForm"
+              @click="isLoginForm = !isLoginForm"
+              style="cursor:pointer"
+              >Register</a
+            >
+            <a v-else @click="isLoginForm = !isLoginForm" style="cursor:pointer"
+              >Login</a
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -47,10 +27,17 @@
 </template>
 
 <script>
+import Login from "../components/auth/Login";
+import Register from "../components/auth/Register";
 export default {
+  components: {
+    Login,
+    Register
+  },
   data() {
     return {
       saveFormData: false,
+      isLoginForm: true,
       credentials: {
         username: "",
         password: ""
