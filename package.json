@@ -17,6 +17,6 @@
     "dotenv": "^9.0.2",
     "fs": "^0.0.1-security",
     "nuxt": "^2.15.7",
-    "socket.io-client": "^4.2.0"
+    "socket.io-client": "^4.3.1"
   }
 }
